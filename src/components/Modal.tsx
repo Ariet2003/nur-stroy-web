@@ -64,11 +64,11 @@ export function ConfirmModal({
   const getButtonStyles = () => {
     switch (type) {
       case 'danger':
-        return 'bg-red-600 hover:bg-red-700 text-white';
+        return 'bg-white hover:bg-gray-100 text-black border border-gray-300';
       case 'warning':
-        return 'bg-yellow-600 hover:bg-yellow-700 text-white';
+        return 'bg-white hover:bg-gray-100 text-black border border-gray-300';
       default:
-        return 'bg-white hover:bg-gray-200 text-black';
+        return 'bg-white hover:bg-gray-100 text-black border border-gray-300';
     }
   };
 
@@ -80,7 +80,7 @@ export function ConfirmModal({
         <div className="flex gap-3 justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition duration-300"
+            className="px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-lg font-medium transition duration-300 border border-white"
           >
             {cancelText}
           </button>

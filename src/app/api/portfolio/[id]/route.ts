@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { verifyToken } from '@/lib/jwt';
-import { deleteMultipleFromImgBB } from '@/lib/imgbb';
+import { deleteMultipleFromImgBB, uploadMultipleToImgBB } from '@/lib/imgbb';
 
 // DELETE - удалить пример работы
 export async function DELETE(
@@ -93,7 +93,7 @@ export async function PUT(
     }
 
     const { id } = await params;
-    const { title, description } = await request.json();
+    const { title, description, images } = await request.json();
 
     // Валидация данных
     if (!title || !description) {
@@ -115,12 +115,45 @@ export async function PUT(
       );
     }
 
+    let finalImages = existingPortfolio.images;
+
+    // Если переданы изображения, обрабатываем их
+    if (images && Array.isArray(images)) {
+      // Разделяем изображения на существующие (URL) и новые (base64)
+      const existingImageUrls = images.filter(img => img.startsWith('http'));
+      const newBase64Images = images.filter(img => !img.startsWith('http') && !img.startsWith('data:'));
+
+      // Загружаем новые изображения на imgbb
+      let newImageUrls: string[] = [];
+      if (newBase64Images.length > 0) {
+        newImageUrls = await uploadMultipleToImgBB(newBase64Images, title.replace(/\s+/g, '_'));
+      }
+
+      // Объединяем существующие и новые URL
+      finalImages = [...existingImageUrls, ...newImageUrls];
+
+      // Удаляем старые изображения, которые больше не используются
+      const oldImagesToDelete = existingPortfolio.images.filter(oldImg => 
+        !finalImages.includes(oldImg)
+      );
+      
+      if (oldImagesToDelete.length > 0) {
+        try {
+          await deleteMultipleFromImgBB(oldImagesToDelete);
+        } catch (error) {
+          console.error('Ошибка удаления старых изображений из ImgBB:', error);
+          // Продолжаем обновление даже если не удалось удалить старые изображения
+        }
+      }
+    }
+
     // Обновляем запись
     const updatedPortfolio = await prisma.portfolio.update({
       where: { id },
       data: {
         title,
-        description
+        description,
+        images: finalImages
       }
     });
 

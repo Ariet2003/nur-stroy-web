@@ -154,4 +154,3 @@ export function decodeTokenEdge(token: string): JWTPayload | null {
     return null;
   }
 }
-
