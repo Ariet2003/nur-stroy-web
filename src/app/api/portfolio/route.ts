@@ -18,17 +18,6 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Ошибка получения портфолио:', error);
-    
-    // Проверяем, является ли ошибка ошибкой Prisma
-    if (error instanceof Error && error.message.includes('PrismaClientInitializationError')) {
-      // Возвращаем пустой массив вместо ошибки для лучшего UX
-      return NextResponse.json({
-        success: true,
-        data: [],
-        message: 'База данных временно недоступна'
-      });
-    }
-    
     return NextResponse.json(
       { success: false, message: 'Ошибка получения данных' },
       { status: 500 }
