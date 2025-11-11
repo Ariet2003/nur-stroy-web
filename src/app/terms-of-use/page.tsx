@@ -255,7 +255,7 @@ export default function TermsOfUsePage() {
                     <p>Воскресенье: выходной</p>
                     <p className="mt-4">
                       <strong>Социальные сети:</strong><br />
-                      Instagram: <a href="https://instagram.com/nurstroy.company" target="_blank" rel="noopener noreferrer" className="text-black hover:underline">@nurstroy.company</a>
+                      Instagram: <a href="https://instagram.com/nur.company_kg" target="_blank" rel="noopener noreferrer" className="text-black hover:underline">@nurstroy.company</a>
                     </p>
                   </div>
                 </div>
