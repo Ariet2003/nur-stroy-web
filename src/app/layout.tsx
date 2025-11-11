@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NUR STROY - Строительная компания полного цикла",
   description: "Профессиональные архитектурные, дизайнерские и строительные услуги. Проектирование, строительство и ремонт под ключ в Алматы.",
+  icons: {
+    icon: '/logo.svg',
+  },
 };
 
 export default function RootLayout({
