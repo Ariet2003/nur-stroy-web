@@ -20,15 +20,8 @@ const nextConfig: NextConfig = {
   },
   // Включаем Prisma в серверный бандл
   serverExternalPackages: ['@prisma/client', 'prisma'],
-  // Webpack конфигурация для Prisma
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push({
-        '@prisma/client': 'commonjs @prisma/client',
-      });
-    }
-    return config;
-  },
+  // Turbopack конфигурация (пустая, чтобы убрать предупреждение)
+  turbopack: {},
 };
 
 export default nextConfig;
