@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPortfolioById, updatePortfolio } from '@/lib/db';
 import { verifyToken } from '@/lib/jwt';
 import { deleteFromImgBB } from '@/lib/imgbb';
 
@@ -37,9 +37,7 @@ export async function DELETE(
     }
 
     // Проверяем существование записи
-    const existingPortfolio = await prisma.portfolio.findUnique({
-      where: { id }
-    });
+    const existingPortfolio = await getPortfolioById(id);
 
     if (!existingPortfolio) {
       return NextResponse.json(
@@ -75,12 +73,7 @@ export async function DELETE(
     // Обновляем запись, убирая изображение из массива
     const updatedImages = existingPortfolio.images.filter(img => img !== imageUrl);
     
-    const updatedPortfolio = await prisma.portfolio.update({
-      where: { id },
-      data: {
-        images: updatedImages
-      }
-    });
+    const updatedPortfolio = await updatePortfolio(id, existingPortfolio.title, existingPortfolio.description, updatedImages);
 
     return NextResponse.json({
       success: true,

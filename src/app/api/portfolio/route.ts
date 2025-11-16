@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPortfolios, createPortfolio } from '@/lib/db';
 import { uploadMultipleToImgBB } from '@/lib/imgbb';
 import { verifyToken } from '@/lib/jwt';
 
@@ -10,11 +10,7 @@ export const dynamic = 'force-dynamic'; // Отключаем кеширован
 // GET - получить все примеры работ
 export async function GET() {
   try {
-    const portfolios = await prisma.portfolio.findMany({
-      orderBy: {
-        createdAt: 'desc'
-      }
-    });
+    const portfolios = await getPortfolios();
 
     return NextResponse.json({
       success: true,
@@ -77,13 +73,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Сохраняем в базу данных
-    const portfolio = await prisma.portfolio.create({
-      data: {
-        title,
-        description,
-        images: imageUrls
-      }
-    });
+    const portfolio = await createPortfolio(title, description, imageUrls);
 
     return NextResponse.json({
       success: true,

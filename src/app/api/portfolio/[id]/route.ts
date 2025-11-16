@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPortfolioById, deletePortfolio, updatePortfolio } from '@/lib/db';
 import { verifyToken } from '@/lib/jwt';
 import { deleteMultipleFromImgBB, uploadMultipleToImgBB } from '@/lib/imgbb';
 
@@ -33,9 +33,7 @@ export async function DELETE(
     const { id } = await params;
 
     // Проверяем существование записи
-    const existingPortfolio = await prisma.portfolio.findUnique({
-      where: { id }
-    });
+    const existingPortfolio = await getPortfolioById(id);
 
     if (!existingPortfolio) {
       return NextResponse.json(
@@ -55,9 +53,7 @@ export async function DELETE(
     }
 
     // Удаляем запись из базы данных
-    await prisma.portfolio.delete({
-      where: { id }
-    });
+    await deletePortfolio(id);
 
     return NextResponse.json({
       success: true,
@@ -108,9 +104,7 @@ export async function PUT(
     }
 
     // Проверяем существование записи
-    const existingPortfolio = await prisma.portfolio.findUnique({
-      where: { id }
-    });
+    const existingPortfolio = await getPortfolioById(id);
 
     if (!existingPortfolio) {
       return NextResponse.json(
@@ -152,14 +146,7 @@ export async function PUT(
     }
 
     // Обновляем запись
-    const updatedPortfolio = await prisma.portfolio.update({
-      where: { id },
-      data: {
-        title,
-        description,
-        images: finalImages
-      }
-    });
+    const updatedPortfolio = await updatePortfolio(id, title, description, finalImages);
 
     return NextResponse.json({
       success: true,
