@@ -10,11 +10,11 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^6.17.1",
+    "@prisma/client": "5.19.1",
     "@types/jsonwebtoken": "^9.0.10",
     "jsonwebtoken": "^9.0.2",
     "next": "16.0.0",
-    "prisma": "^6.17.1",
+    "prisma": "5.19.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
