@@ -3,6 +3,15 @@ import { prisma } from '@/lib/prisma';
 import { uploadMultipleToImgBB } from '@/lib/imgbb';
 import { verifyToken } from '@/lib/jwt';
 
+// Увеличиваем лимит размера body для загрузки изображений
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
+
 // GET - получить все примеры работ
 export async function GET() {
   try {
