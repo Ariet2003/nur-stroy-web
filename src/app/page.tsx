@@ -541,7 +541,7 @@ export default function Home() {
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">NUR STROY</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-              Ведущая строительная компания Кыргызстана с 10-летним опытом создания архитектурных шедевров 
+              Ведущая строительная компания Кыргызстана с 5-летним опытом создания архитектурных шедевров 
               и воплощения самых смелых дизайнерских идей в реальность.
             </p>
           </div>
@@ -553,7 +553,7 @@ export default function Home() {
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Наша история</h3>
                 <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                  Основанная в 2015 году, компания NUR STROY начинала как небольшая архитектурная студия с большими амбициями. 
+                  Основанная в 2020 году, компания NUR STROY начинала как небольшая архитектурная студия с большими амбициями. 
                   Сегодня мы — команда из более чем 50 высококвалифицированных специалистов, включающая архитекторов, 
                   дизайнеров, инженеров и строителей.
                 </p>
@@ -912,7 +912,7 @@ export default function Home() {
                   <h3 className="text-2xl sm:text-3xl font-bold">NUR STROY</h3>
                 </div>
                 <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                  Ведущая строительная компания Кыргызстана с 10-летним опытом создания 
+                  Ведущая строительная компания Кыргызстана с 5-летним опытом создания 
                   архитектурных шедевров и воплощения дизайнерских идей в реальность.
                 </p>
                 <div className="flex flex-wrap gap-4">
