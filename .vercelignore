@@ -1,7 +1,0 @@
-# Vercel ignore file
-# Make sure Prisma binaries are NOT ignored
-
-# Don't ignore these
-!node_modules/.prisma
-!node_modules/@prisma
-
