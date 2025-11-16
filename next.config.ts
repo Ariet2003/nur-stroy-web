@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: false,
   },
+  // Настройки для Vercel
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
 };
 
 export default nextConfig;

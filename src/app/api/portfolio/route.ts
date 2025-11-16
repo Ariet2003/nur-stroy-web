@@ -3,14 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { uploadMultipleToImgBB } from '@/lib/imgbb';
 import { verifyToken } from '@/lib/jwt';
 
-// Увеличиваем лимит размера body для загрузки изображений
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-  },
-};
+// Конфигурация для App Router в Next.js 16
+export const maxDuration = 60; // Максимальное время выполнения функции (секунды)
+export const dynamic = 'force-dynamic'; // Отключаем кеширование
 
 // GET - получить все примеры работ
 export async function GET() {
